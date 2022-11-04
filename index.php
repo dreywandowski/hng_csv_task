@@ -49,6 +49,14 @@ if (($handle = fopen('uploads/'.$csv_file, "r")) !== FALSE) {
 
 
      $new_csv = fopen("modified_csv/"."filename_output.csv", "w");
+
+     $delimiter = ",";
+
+    $fields = array('Team Name','Serial Number', 'Name', 'Extra Info', 'Description', 'Gender', 'Attributes', 'UUID', 'Hash');
+    fputcsv($new_csv, $fields, $delimiter);
+
+    //set column headers
+    fputcsv($f, $fields, $delimiter);
      foreach ($json_array as $line) {
          $hash = hash_hmac('sha256',json_encode($line), false);
          $line["hash"] = $hash;
